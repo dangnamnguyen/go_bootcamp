@@ -12,7 +12,7 @@ import (
 
 var character string
 
-func read_input(file_name string, chanel chan []string) _, error {
+func read_input(file_name string, channel chan []string) _, error {
 	file, err := os.Open(file_name)
 	if err != nil {
 		log.Fatal(err)
@@ -25,13 +25,13 @@ func read_input(file_name string, chanel chan []string) _, error {
 	for scanner.Scan() {
 		character = scanner.Text()
 	}
-	if nil == chanel {
+	if nil == channel {
 		fmt.Println("The content is null\n")
 		err = err.new("The content is null")
 		return err
 	} else {
 		split_string := strings.Split(character, " ")
-		chanel <- split_string
+		channel <- split_string
 	}
 	return
 }
@@ -49,8 +49,8 @@ func main() {
 	Input_file_path := "D:/04_Go_course_pratice/02_Concurency/src/main/Input"
 	//Output
 	counts := make(map[string]int)
-	//Chanel between routines
-	chanel := make(chan []string)
+	//channel between routines
+	channel := make(chan []string)
 	//Create files from the directory
 	files, err := ioutil.ReadDir(Input_file_path)
 	//If no file exist will return error
@@ -64,12 +64,12 @@ func main() {
 	//Read content of files
 	//Number of routines depend on how many files exist
 	for _, input := range Input_file_name {
-		go read_input(Input_file_path+"/"+input, chanel)
+		go read_input(Input_file_path+"/"+input, channel)
 	}
 	//Count the occurency of each character
 	go func() {
 		for {
-			count_occurences(<-chanel, counts)
+			count_occurences(<-channel, counts)
 		}
 	}()
 	//Delay for all routines
