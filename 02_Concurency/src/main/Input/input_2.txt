@@ -1,1 +1,4 @@
-bc a c s c
+bc a
+a
+s
+b

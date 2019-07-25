@@ -1,1 +1,3 @@
-a v c c d
+bc a
+s
+b
