@@ -52,7 +52,7 @@ func main() {
 	//Create list of potential file name
 	var InputFileName []string
 	//Path to the Input files
-	InputFilePath := "D:/05_Go_Repo_boot_Camp/go_bootcamp/02_Concurency/src/main/Input"
+	InputFilePath := "./Input"
 	//Output
 	counts := make(map[string]int)
 	//channel between routines
